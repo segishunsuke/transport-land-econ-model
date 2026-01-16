@@ -26,3 +26,34 @@
 3. 以下のコマンドでシミュレーションを実行します。
    ```bash
    python model_simulation.py
+
+# urban-transport-wei-model
+
+本リポジトリは、交通インフラ整備における土地投入と交通混雑を考慮した都市経済モデルの数値シミュレーションコードを公開するものです。論文の本編および付録Bの分析結果を再現するためのプログラムが含まれています。
+
+## フォルダ構成とファイル概要
+
+`Codes/` フォルダ内に以下の Python スクリプトを配置しています。
+
+- **`model_simulation.py`**: 
+  本編の分析（Henderson型モデル）に用いるプログラムです。複数都市モデルにおける空間均衡の算出、次善（Second Best）の便益評価率 $\delta_G$ の算出などを行います。
+  
+- **`model_city_structure_simulation.py`**: 
+  付録Bの分析（都市内構造を考慮した複数都市・複数ゾーンモデル）に用いるプログラムです。家計の居住地・就業地選択（ロジットモデル）を内生化した空間均衡、および、Second Bestの便益評価率 $\delta_G$ の算出を行います。
+
+- **`myoptimize.py`**: 
+  本研究のために作成した数値計算用ライブラリです。均衡条件の解法（ニュートン法）や社会的余剰の最大化（BFGS法）などの最適化アルゴリズムを提供します。
+
+## 使用方法
+
+### 1. パラメータの設定
+各シミュレーションファイル（`model_simulation.py`, `model_city_structure_simulation.py`）の冒頭部分に、$\alpha, \beta, \gamma$ などの主要なパラメータ設定が記述されています。分析ケースに合わせて数値を変更してください。
+
+### 2. 実行
+各ファイル末尾の `if __name__ == "__main__":` ブロックに、基本的な実行例（均衡解の算出や結果の CSV 出力など）が記載されています。
+以下のコマンドで実行可能です：
+
+```bash
+python model_simulation.py
+# または
+python model_city_structure_simulation.py
